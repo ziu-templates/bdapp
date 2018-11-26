@@ -1,6 +1,7 @@
 /**
  *
  */
+process.env.NODE_ENV = 'development';
 const path = require('path'),
     rm = require('rimraf'),
     webpack = require('webpack'),

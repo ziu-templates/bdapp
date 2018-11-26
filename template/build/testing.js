@@ -4,6 +4,7 @@
  * scss
  * eslint
  */
+process.env.NODE_ENV = 'testing';
 const rm = require('rimraf'),
     webpack = require('webpack'),
     env = require('../config/env.testing.js'),

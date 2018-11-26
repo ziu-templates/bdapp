@@ -75,6 +75,15 @@ module.exports = function (cb = () => {}) {
                     throw err;
                 }
             });
+            if (process.env.NODE_ENV === 'development') {
+                rm('dev/**/*', {
+                    glob: true
+                }, function(err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            }
         }
     }, (err) => {
         console.log(err);

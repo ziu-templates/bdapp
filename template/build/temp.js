@@ -3,6 +3,7 @@ let path = require('path'),
     exists = fs.existsSync,
     pipe = require('./pipe.js'),
     globby = require('globby'),
+    cp = require('cp'),
     rm = require('rimraf'),
     ora = require('ora'),
     watcher = null,
@@ -83,6 +84,7 @@ module.exports = function (cb = () => {}) {
                         console.log(err);
                     }
                 });
+                cp.sync('dev/project.swan.json', 'src/project.swan.json');
             }
         }
     }, (err) => {

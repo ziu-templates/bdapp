@@ -14,7 +14,7 @@ module.exports = {
             type: 'string',
             required: false,
             message: 'Project description',
-            default: 'A weapp(微信小程序) project with ziu',
+            default: 'A swan(百度小程序) project with ziu',
         },
         author: {
             type: 'string',

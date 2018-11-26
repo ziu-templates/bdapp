@@ -22,36 +22,43 @@ baseWebpackConfigs.commonConfig.output = appConfig.output = {
 appConfig.plugins.push(new webpack.DefinePlugin({
     'process.env': env
 }));
-temp(function(endFn) {
-    commonWebpack(appConfig, function(compiler) {
-        /**
-         * [监听watch]
-         */
-        watching = compiler.watch({
-            aggregateTimeout: 300,
-            poll: 1000
-        }, (err, stats) => {
-            if (err) {
-                throw err;
-            }
-            // console.log(stats.toString())
-            if (compilerTimes !== 1) {
-                console.log(`Compilation success! ${compilerTimes} times \n`);
-            }
-            console.log('watching...\n');
+rm('dev/**/*', {
+    glob: true
+}, function(err) {
+    if (err) {
+        console.log(err);
+    }
+    temp(function(endFn) {
+        commonWebpack(appConfig, function(compiler) {
             /**
-             * [删除编译scss生成的js]
+             * [监听watch]
              */
-            rm('dev/**/*_scss.js', {
-                glob: true
-            }, function(err) {
+            watching = compiler.watch({
+                aggregateTimeout: 300,
+                poll: 1000
+            }, (err, stats) => {
                 if (err) {
-                    console.log(err);
+                    throw err;
                 }
+                // console.log(stats.toString())
+                if (compilerTimes !== 1) {
+                    console.log(`Compilation success! ${compilerTimes} times \n`);
+                }
+                console.log('watching...\n');
+                /**
+                 * [删除编译scss生成的js]
+                 */
+                rm('dev/**/*_scss.js', {
+                    glob: true
+                }, function(err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+                ++compilerTimes;
             });
-            ++compilerTimes;
+            endFn(watching);
+            console.log(`First Compilation success! ${compilerTimes} times \n`);
         });
-        endFn(watching);
-        console.log(`First Compilation success! ${compilerTimes} times \n`);
     });
 });

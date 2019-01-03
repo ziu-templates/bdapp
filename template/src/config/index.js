@@ -3,14 +3,15 @@
  */
 const ENV = typeof process !== 'undefined' && process && process.env && process.env.API_ENV ? process.env.API_ENV : 'production',
     conf = {
-    env: ENV,
-    apiEnv: 'weapp',
-    appId: 'xxxxx',
-    componentAppid: '',
-    development: 'http://xxxxx.cn',
-    test: 'http://xxxxx.cn',
-    production: 'http://xxxxx.cn'
-};
+        env: ENV,
+        apiEnv: 'weapp',
+        appId: 'xxxxx',
+        componentAppid: '',
+        development: 'https://xxx.com',
+        staging: 'https://xxx.com',
+        testing: 'https://xxx.com',
+        production: 'https://xxx.com'
+    };
 const BASE_URL = true ? conf['test'] : conf[conf.env];
 
 module.exports = {

@@ -12,6 +12,7 @@
     {{/lint}}
     "dev": "node build/dev.js",
     "build": "node build/prod.js",
+    "stg": "node build/stg.js",
     "test": "node build/testing.js"
   },
   "devDependencies": {

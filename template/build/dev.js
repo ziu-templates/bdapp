@@ -7,6 +7,8 @@ const path = require('path'),
     webpack = require('webpack'),
     env = require('../config/env.dev.js'),
     temp = require('../build/temp.js'),
+    conf = require('../config'),
+    CLIEngine = require("eslint").CLIEngine,
     baseWebpackConfigs = require('./webpack.base.js'),
     commonWebpack = require('./webpack.common.js');
 
@@ -33,6 +35,16 @@ rm('dev/**/*', {
             /**
              * [监听watch]
              */
+            {{#lint}}
+            /**
+             * eslint
+             */
+            let eslintCli = new CLIEngine({
+                    extensions: ['.js']
+                }),
+                formatter = require('eslint-friendly-formatter'),
+                results = null;
+            {{/lint}}
             watching = compiler.watch({
                 aggregateTimeout: 300,
                 poll: 1000
@@ -40,6 +52,35 @@ rm('dev/**/*', {
                 if (err) {
                     throw err;
                 }
+                {{#lint}}
+                /**
+                 * eslint
+                 */
+                const globalVariable = conf.globalVariable;
+                results = eslintCli.executeOnFiles(['src/']).results;
+                if (results.length) {
+                    results.map((result) => {
+                        let messages = result.messages,
+                            reg = /\'+[a-zA-Z0-9_-]+\'/;
+                        messages = messages.filter((msg) => {
+                            if (msg.ruleId == 'no-undef') {
+                                let results = reg.exec(msg.message),
+                                    variable = /[a-zA-Z0-9_-]+/g.exec(results[0] || ''),
+                                    idx = globalVariable.indexOf(variable[0] || '');
+                                if (idx < 0) {
+                                    return true;
+                                }
+                                return false;
+                            }
+                            return true;
+                        });
+                        result.messages = messages;
+                    });
+                }
+                setTimeout(() => {
+                    console.log(formatter(results));
+                }, 0);
+                {{/lint}}
                 // console.log(stats.toString())
                 if (compilerTimes !== 1) {
                     console.log(`Compilation success! ${compilerTimes} times \n`);

@@ -71,7 +71,9 @@ let appConfig = {
                             results[0].messages = messages;
                         }
                         let formatter = require('eslint-friendly-formatter');
-                        console.log(formatter(results));
+                        setTimeout(() => {
+                            console.log(formatter(results));
+                        }, 1000);
                     },
                     emitWarning: true
                 }

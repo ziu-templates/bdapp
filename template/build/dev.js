@@ -59,7 +59,7 @@ rm('dev/**/*', {
                 const globalVariable = conf.globalVariable;
                 results = eslintCli.executeOnFiles(['src/']).results;
                 if (results.length) {
-                    results.map((result) => {
+                    results = results.filter((result) => {
                         let messages = result.messages,
                             reg = /\'+[a-zA-Z0-9_-]+\'/;
                         messages = messages.filter((msg) => {
@@ -75,11 +75,18 @@ rm('dev/**/*', {
                             return true;
                         });
                         result.messages = messages;
+                        return result.messages && result.messages.length;
                     });
                 }
                 setTimeout(() => {
+                    if (results.length) {
+                        clearConsole();
+                    }
                     console.log(formatter(results));
                 }, 0);
+                if (!results.length) {
+                    clearConsole('Eslint error: ' + results.length);
+                }
                 {{/lint}}
                 // console.log(stats.toString())
                 if (compilerTimes !== 1) {
@@ -103,3 +110,9 @@ rm('dev/**/*', {
         });
     });
 });
+
+function clearConsole(msg) {
+    const clear = "\x1B[2J\x1B[3J\x1B[H";
+    const output = msg ? clear + msg + "\n\n" : clear;
+    process.stdout.write(output);
+}

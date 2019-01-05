@@ -6,7 +6,9 @@
  */
 const path = require('path'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin');
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    minify = require('html-minifier').minify,
+    conf = require('../config');
 
 let common = {
     output: {
@@ -50,7 +52,18 @@ let appConfig = {
             {
                 context: path.resolve(__dirname, '../', 'src'),
                 from: '**/*',
-                ignore: ['**/*.scss']
+                ignore: ['**/*.scss'],
+                transform (content, path) {
+                    if (conf.xmlType.exec(path) && process.env.NODE_ENV != 'development') {
+                        return minify(content.toString(), {
+                            removeComments: true,
+                            collapseWhitespace: true,
+                            collapseInlineTagWhitespace: true,
+                            sortAttributes: true
+                        });
+                    }
+                    return content;
+                }
             }
         ])
     ]

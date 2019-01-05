@@ -46,6 +46,7 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "file-loader": "^1.1.6",
     "globby": "^7.1.1",
+    "html-minifier": "^3.5.21",
     "node-sass": "^4.7.2",
     "nodemon": "^1.15.1",
     "ora": "^1.4.0",

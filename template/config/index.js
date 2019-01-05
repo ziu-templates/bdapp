@@ -1,3 +1,4 @@
 module.exports = {
-    globalVariable: ['App', 'Page', 'getApp', 'swan']
+    globalVariable: ['App', 'Page', 'getApp', 'swan'],
+    xmlType: /\.(wxml|axml|swan)(\?.*)?$/
 };

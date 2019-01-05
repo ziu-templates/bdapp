@@ -112,7 +112,7 @@ rm('dev/**/*', {
 });
 
 function clearConsole(msg) {
-    const clear = "\x1B[2J\x1B[3J\x1B[H";
-    const output = msg ? clear + msg + "\n\n" : clear;
+    const clear = process.platform === 'win32' ? '\x1B[2J\x1B[0f' : '\x1B[2J\x1B[3J\x1B[H',
+        output = msg ? clear + msg + "\n\n" : clear;
     process.stdout.write(output);
 }

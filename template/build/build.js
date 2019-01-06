@@ -6,6 +6,7 @@
  */
 process.env.NODE_ENV = 'production';
 const rm = require('rimraf'),
+    path = require('path'),
     webpack = require('webpack'),
     temp = require('../build/temp.js'),
     baseWebpackConfigs = require('./webpack.base.js'),

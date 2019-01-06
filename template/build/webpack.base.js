@@ -9,7 +9,8 @@ const path = require('path'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     minify = require('html-minifier').minify,
     UglifyJS = require('uglify-es'),
-    conf = require('../config');
+    conf = require('../config'),
+    FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 let common = {
     output: {
@@ -42,10 +43,15 @@ let appConfig = {
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, '../', 'dist')
+        path: path.resolve(__dirname, '../', 'build/_temp')
     },
     module: {
         rules: [
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/
+            }
         ]
     },
     plugins: [
@@ -73,7 +79,8 @@ let appConfig = {
                     return content;
                 }
             }
-        ])
+        ]),
+        new FriendlyErrorsPlugin()
     ]
 };
 module.exports = {

@@ -7,7 +7,6 @@
 const path = require('path'),
     fs = require('fs'),
     exists = fs.existsSync,
-    rm = require('rimraf'),
     webpack = require('webpack'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     baseWebpackConfigs = require('./webpack.base.js');
@@ -15,10 +14,9 @@ const path = require('path'),
 let commonConfig = baseWebpackConfigs.commonConfig,
     appBaseConfig = baseWebpackConfigs.appConfig,
     configs = [],
-    compiler = null,
-    compilerTimes = 1;
+    compiler = null;
 
-module.exports = function (appConfig = appBaseConfig, cb = () => {}) {
+module.exports = function (appConfig = appBaseConfig, cb = () => {}, foutput) {
     if (!exists(path.resolve(__dirname, '_temp'))) {
         return false;
     }
@@ -44,6 +42,10 @@ module.exports = function (appConfig = appBaseConfig, cb = () => {}) {
         Object.keys(commonConfig).forEach(function (key) {
             if (key === 'plugins') {
                 temp[key] = [].concat(temp[key], commonConfig[key]);
+                return true;
+            }
+            if (key === 'output' && foutput) {
+                temp[key] = foutput;
                 return true;
             }
             temp[key] = commonConfig[key];

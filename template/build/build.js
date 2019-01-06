@@ -11,7 +11,11 @@ const rm = require('rimraf'),
     baseWebpackConfigs = require('./webpack.base.js'),
     commonWebpack = require('./webpack.common.js'),
     UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-let env = require('../config/env.prod.js');
+let env = require('../config/env.prod.js'),
+    foutput = {
+        filename: '[name].js',
+        path: path.resolve(__dirname, '../', 'dist')
+    };
 module.exports = function(buildEnv) {
     env = buildEnv || env;
     let appConfig = baseWebpackConfigs.appConfig;
@@ -54,7 +58,7 @@ module.exports = function(buildEnv) {
                     }
                 });
                 console.log('build production success!');
-            });
+            }, foutput);
         });
     });
 };

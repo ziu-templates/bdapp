@@ -59,6 +59,7 @@ let appConfig = {
             {
                 context: path.resolve(__dirname, '../', 'src'),
                 from: '**/*',
+                to: process.env.NODE_ENV === 'development' ? path.resolve(__dirname, '../', 'dev') : path.resolve(__dirname, '../', 'dist'),
                 ignore: ['**/*.scss'],
                 transform (content, path) {
                     if (conf.xmlType.exec(path) && process.env.NODE_ENV != 'development') {

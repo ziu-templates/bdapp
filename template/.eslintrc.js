@@ -35,7 +35,7 @@ module.exports = {
         // not require newline at the end of files
         'eol-last': 0,
         // disallow semi in line end
-        'semi': ["error", "never"],
+        'semi': ["error", "always"],
         // allow paren-less arrow functions
         'arrow-parens': 0,
         // allow async-await

@@ -10,7 +10,7 @@
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "{{ name }}",
         "navigationBarTextStyle":"black"
-    },{{#tab}}
+    },
     "tabBar": {
         "list": [
             {
@@ -27,6 +27,5 @@
             }
         ]
     },
-    {{/tab}}
     "debug": true
 }

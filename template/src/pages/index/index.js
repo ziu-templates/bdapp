@@ -1,7 +1,7 @@
-let app = getApp();
+// let app = getApp();
 Page({
     data: {},
-    onLoad(opts) {
+    onLoad() {
     },
     onShow() {},
     onUnload() {}

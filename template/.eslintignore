@@ -1,6 +1,0 @@
-build/*.js
-config/*.js
-test/*.js
-node_modules/*.js
-src/generic/**/*.js
-src/assets/js/gps.js

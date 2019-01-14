@@ -10,10 +10,10 @@
         "fix": "npm run lint -- --fix",
         "lint": "eslint --ext .js src -c build/.eslintrc.js",
         {{/lint}}
-        "dev": "node build/bin/dev.js",
-        "build": "node build/bin/prod.js",
-        "stg": "node build/stg.js",
-        "test": "node build/testing.js"
+        "dev": "node scripts/bin/dev.js",
+        "build": "node scripts/bin/prod.js",
+        "stg": "node scripts/stg.js",
+        "test": "node scripts/testing.js"
     },
     "devDependencies": {
         "babel-core": "^6.26.3",

@@ -56,7 +56,7 @@ module.exports = {
         // }
     },
     filters: {
-        '.eslintrc.js': 'lint',
-        '.eslintignore': 'lint'
+        'scripts/.eslintrc.js': 'lint',
+        'scripts/.eslintignore': 'lint'
     }
 };

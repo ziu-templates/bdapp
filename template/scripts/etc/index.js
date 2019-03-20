@@ -19,7 +19,7 @@ module.exports = {
   cssSuffix: 'css',
   xmlSuffix: 'swan',
   eslintSuffix: '(js)',
-  miniJsSuffix: 'js',
+  miniJsSuffix: '',
   globalObject: 'global',
   development: getPrjConfig({
     UglifyJs: false,

@@ -4,24 +4,32 @@
 const path = require('path');
 
 function getPrjConfig({
-                          UglifyJs = true,
-                          codePath = path.resolve(process.cwd(), 'dist')
+                        UglifyJs = true,
+                        codePath = path.resolve(process.cwd(), 'dist/release')
                       } = {}) {
-    return {
-        UglifyJs,
-        codePath
-    };
+  return {
+    UglifyJs,
+    codePath,
+    pkgConfigName: 'project.config.json',
+  };
 }
 
 module.exports = {
-    globalVariable: ['App', 'Page', 'getApp', 'swan'],
-    xmlType: /\.(wxml|axml|swan)(\?.*)?$/,
-    cssSuffix: 'css',
-    development: getPrjConfig({
-        UglifyJs: false,
-        codePath: path.resolve(process.cwd(), 'dev')
-    }),
-    testing: getPrjConfig(),
-    staging: getPrjConfig(),
-    production: getPrjConfig()
+  compileCssSuffix: 'scss',
+  cssSuffix: 'css',
+  xmlSuffix: 'swan',
+  eslintSuffix: '(js)',
+  miniJsSuffix: 'js',
+  globalObject: 'global',
+  development: getPrjConfig({
+    UglifyJs: false,
+    codePath: path.resolve(process.cwd(), 'dist/dev'),
+  }),
+  testing: getPrjConfig({
+    codePath: path.resolve(process.cwd(), 'dist/testing'),
+  }),
+  staging: getPrjConfig({
+    codePath: path.resolve(process.cwd(), 'dist/staging'),
+  }),
+  production: getPrjConfig(),
 };

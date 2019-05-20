@@ -33,16 +33,16 @@ module.exports = {
       type: 'list',
       message: 'Pick an ESLint preset',
       choices: [
-        {
-          name: 'Standard (https://github.com/standard/standard)',
-          value: 'standard',
-          short: 'Standard',
-        },
         // {
-        //     name: 'Airbnb (https://github.com/airbnb/javascript)',
-        //     value: 'airbnb',
-        //     short: 'Airbnb',
+        //   name: 'Standard (https://github.com/standard/standard)',
+        //   value: 'standard',
+        //   short: 'Standard',
         // },
+        {
+            name: 'Airbnb (https://github.com/airbnb/javascript)',
+            value: 'airbnb',
+            short: 'Airbnb',
+        },
         // {
         //     name: 'none (configure it yourself)',
         //     value: 'none',

@@ -10,7 +10,7 @@ function getPrjConfig({
   return {
     UglifyJs,
     codePath,
-    pkgConfigName: 'project.config.json',
+    pkgConfigName: 'project.swan.json',
   };
 }
 
